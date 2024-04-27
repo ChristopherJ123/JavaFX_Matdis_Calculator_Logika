@@ -13,8 +13,8 @@ public class MembacaKurung {
     }
 
     static String switchPositiveNegative(String item) {
-        if (isNegative(item)) return item.substring(1);
-        else return "n" + item;
+        if (isNegative(item)) return String.valueOf(item.charAt(2));
+        else return "n(" + item + ")";
     }
 
     // 1. Hukum Identitas
@@ -101,10 +101,13 @@ public class MembacaKurung {
     // 14. Hukum Bi-implikasi
     static boolean hkBiimplikasi(String[] param) {
         if (param[1].equals("b")) {
-            String temp = param[0];
-            param[0] = "(" + param[0] + " i " + param[2] + ")";
+            String[] arr1 = {param[0], "i", param[2]};
+            hkImplikasi(arr1);
+            String[] arr2 = {param[2], "i", param[0]};
+            hkBiimplikasi(arr2);
+            param[0] = "(" + arr1[0] + " i " + arr1[2] + ")";
             param[1] = "a";
-            param[2] = "(" + param[2] + " i " + temp + ")";
+            param[2] = "(" + arr2[2] + " i " + arr2[0] + ")";
             return true;
         }
         return false;
@@ -114,6 +117,7 @@ public class MembacaKurung {
     static String[] simplify(String item) {
         String[] items = item.split(" ");
         String hukum = "";
+        boolean terjadiSimplifikasi = true;
         if (hkIdentitas(items)) hukum += "Hk. Identitas"; //1
         if (hkDominasi(items)) hukum += "Hk. Dominasi"; //2
         if (hkIdempoten(items)) hukum += "Hk. Idempoten"; //3
@@ -124,8 +128,9 @@ public class MembacaKurung {
         if (hkBiimplikasi(items)) hukum += "Hk. Bi-implikasi"; //14
         if (hukum.equals("")) {
             hukum = "None";
+            terjadiSimplifikasi = false;
         }
-        return new String[]{Arrays.toString(items).replaceAll("[\\[, \\]]", ""), hukum};
+        return new String[]{Arrays.toString(items).replaceAll("[\\[, \\]]", ""), hukum, String.valueOf(terjadiSimplifikasi)};
     }
 
     static boolean loopPenyederhanaanKurung() {
@@ -194,8 +199,8 @@ public class MembacaKurung {
         boolean running = true;
         int index = 0;
         while (running) { // Running samapai tidak ada spasi
-            System.out.println("INDEX-OF: " + index);
             running = false;
+            System.out.println("INDEX-OF: " + index);
             listInput = new ArrayList<>();
             listOutput = new ArrayList<>();
             HashMap<Integer, Integer> brackets = new HashMap<>();
@@ -220,8 +225,6 @@ public class MembacaKurung {
             // Duplicate listInput to listOutput
             listOutput.addAll(listInput);
 
-
-
             // Iterate through list
             for (int i = 0; i < listInput.size(); i++) {
 
@@ -234,10 +237,11 @@ public class MembacaKurung {
 
                 if (spaceCount == 2) {
                     String[] simplified = simplify(listInput.get(i));
-                    listOutput.set(i, simplified[0]);
+                    listOutput.set(i, simplified[0].trim());
                     System.out.print("Hukum: " + simplified[1] + "(" + listInput.get(i) + ")");
                     System.out.println(" menjadi: " + listOutput.get(i));
-                    running = true;
+                    running = Boolean.parseBoolean(simplified[2]);
+                    System.out.println(running);
                 } else {
 //                    System.out.println("++++++++++");
                     System.out.println("----------");
@@ -249,7 +253,8 @@ public class MembacaKurung {
 //                    System.out.println("++++++++++");
                 }
             }
-            input = "(" + listOutput.get(listOutput.size()-1) + ")";
+
+            input = "(" + listOutput.get(listOutput.size()-1).trim() + ")";
             System.out.println("OUTPUT: " + input);
 
             index++;
@@ -260,8 +265,6 @@ public class MembacaKurung {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         input = scanner.nextLine();
-
-
 
         while (!loopAndIterate()) {
             input = "(".concat(input);
@@ -285,6 +288,15 @@ public class MembacaKurung {
                 System.out.println("NEW INPUT: " + input);
             }
         }
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == 'a' || input.charAt(i) == 'o') {
+                input = input.substring(0, i) + " " + input.charAt(i) + " " + input.substring(i+1);
+                i++;
+            }
+        }
+
+
+
         System.out.println("FINAL RESULT: " + input);
     }
 }
@@ -329,6 +341,7 @@ Testing Prompts
 // (P i nQ) i (nP a Q)
 // (P a (P i nQ)) i (nP a Q)
 // ((P i Q) a (P i nQ))
+// ((n(P) i n(Q)) i (n(P) i n(Q)))
 // ((P i Q) a (P i nQ) o (nP i nQ) i (nP i nQ))
 // (((Q i P) i (P i (P i Q))) a (P i nQ) o (nP i Q) i (nP i nQ))
 // (((Q i P) i (P i (P i Q))) a (P i nQ) o (nP i Q))
