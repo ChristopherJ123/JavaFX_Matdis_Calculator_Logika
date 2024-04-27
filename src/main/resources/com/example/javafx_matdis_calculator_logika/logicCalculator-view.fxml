@@ -8,13 +8,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
-<AnchorPane fx:controller="com.example.javafx_matdis_calculator_logika.LogicCalculatorController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx_matdis_calculator_logika.LogicCalculatorController">
    <children>
       <Label layoutX="73.0" layoutY="49.0" text="Input     :" />
       <Label layoutX="73.0" layoutY="99.0" text="Output  :" />
       <TextField fx:id="UserInput" layoutX="169.0" layoutY="45.0" onKeyPressed="#KeyListener" prefHeight="26.0" prefWidth="495.0" promptText="(p^q)" />
-      <TextField layoutX="169.0" layoutY="95.0" prefHeight="26.0" prefWidth="495.0" />
+      <TextField fx:id="output" layoutX="169.0" layoutY="95.0" prefHeight="26.0" prefWidth="495.0" />
       <TableView layoutX="73.0" layoutY="175.0" prefHeight="276.0" prefWidth="593.0" />
       <ButtonBar layoutX="79.0" layoutY="494.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="560.0">
          <cursor>

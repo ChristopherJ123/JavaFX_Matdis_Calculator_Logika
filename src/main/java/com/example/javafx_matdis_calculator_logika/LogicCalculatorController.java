@@ -1,6 +1,7 @@
 package com.example.javafx_matdis_calculator_logika;
 
 
+import com.example.javafx_matdis_calculator_logika.Testing.MembacaKurung;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -16,6 +17,9 @@ public class LogicCalculatorController {
     private TextField UserInput;
 
     @FXML
+    private TextField output;
+
+    @FXML
     void initialize() {
         UserInput.setEditable(false);
     }
@@ -28,36 +32,20 @@ public class LogicCalculatorController {
             case "p", "q", "t", "f" -> Input = Input.concat(low.toUpperCase());
             case "n", "o", "c", "a", "i", "b", "(", ")", "1", "0" -> {
                 switch (low) {
-                    case "1":Input=Input.concat("T"); break;
-                    case "0":Input=Input.concat("F"); break;
-                    case "n":
-                        Input = Input.concat("~");
-                        break;
-                    case "o":
-                        Input = Input.concat("V");
-                        break;
-                    case "a":
-                        Input = Input.concat("Λ");
-                        break;
-
-                    case "i":
-                        Input = Input.concat("→");
-                        break;
-                    case "b":
-                        Input = Input.concat("↔");
-                        break;
-                    case "(":
-                        Input = Input.concat("(");
-                        break;
-                    case ")":
-                        Input = Input.concat(")");
-                        break;
-                    case "c":
-                        Input = "";
-                        break;
+                    case "1" -> Input = Input.concat("T");
+                    case "0" -> Input = Input.concat("F");
+                    case "n" -> Input = Input.concat("~(");
+                    case "o" -> Input = Input.concat(" V ");
+                    case "a" -> Input = Input.concat(" Λ ");
+                    case "i" -> Input = Input.concat(" → ");
+                    case "b" -> Input = Input.concat(" ↔ ");
+                    case "(" -> Input = Input.concat("(");
+                    case ")" -> Input = Input.concat(")");
+                    case "c" -> Input = "";
                 }
             }
             case "=" -> {
+                output.setText(MembacaKurung.calculate(Input));
             }
         }
         updateScreen();
