@@ -1,10 +1,10 @@
 package com.example.javafx_matdis_calculator_logika;
 
 
-import com.example.javafx_matdis_calculator_logika.Testing.MembacaKurung;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -18,6 +18,9 @@ public class LogicCalculatorController {
 
     @FXML
     private TextField output;
+
+    @FXML
+    private TextArea table;
 
     @FXML
     void initialize() {
@@ -34,7 +37,7 @@ public class LogicCalculatorController {
                 switch (low) {
                     case "1" -> Input = Input.concat("T");
                     case "0" -> Input = Input.concat("F");
-                    case "n" -> Input = Input.concat("~(");
+                    case "n" -> Input = Input.concat("¬(");
                     case "o" -> Input = Input.concat(" V ");
                     case "a" -> Input = Input.concat(" Λ ");
                     case "i" -> Input = Input.concat(" → ");
@@ -45,7 +48,17 @@ public class LogicCalculatorController {
                 }
             }
             case "=" -> {
-                output.setText(MembacaKurung.calculate(Input));
+                String postfix = InfixToPostfixAlgorithm.infixToPostfix(Input.replace(" ", ""));
+                String[][] truthTable = TruthTable.truthTable(postfix);
+                String truthTableString = "";
+                for (String[] row : truthTable) {
+                    for (String item : row) {
+                        truthTableString = truthTableString.concat(item + "   ");
+                    }
+                    truthTableString = truthTableString.concat("\n");
+                }
+                table.setText(truthTableString);
+                output.setText(postfix);
             }
         }
         updateScreen();
@@ -119,22 +132,26 @@ public class LogicCalculatorController {
         String input = event.getText();
         if (event.isShiftDown()) {
             if (input.matches("[90pqtfc6v]")) {
-                if (input.equals("9")) pressButton("(");
-                else if (input.equals("0")) pressButton(")");
-                else if (input.equals("p")) pressButton("P");
-                else if (input.equals("q")) pressButton("Q");
-                else if (input.equals("t")) pressButton("T");
-                else if (input.equals("f")) pressButton("F");
-                else if (input.equals("c")) pressButton("C");
-                else if (input.equals("6")) pressButton("A");
-                else if (input.equals("v")) pressButton("O");
+                switch (input) {
+                    case "9" -> pressButton("(");
+                    case "0" -> pressButton(")");
+                    case "p" -> pressButton("P");
+                    case "q" -> pressButton("Q");
+                    case "t" -> pressButton("T");
+                    case "f" -> pressButton("F");
+                    case "c" -> pressButton("C");
+                    case "6" -> pressButton("A");
+                    case "v" -> pressButton("O");
+                }
             }
         } else if (input.matches("[pqtfnaoibc10]")) {
             pressButton(input);
         } else if (input.matches("[10v]")) {
-            if (input.equals("1")) pressButton("t");
-            else if (input.equals("0")) pressButton("f");
-            else if (input.equals("v")) pressButton("o");
+            switch (input) {
+                case "1" -> pressButton("t");
+                case "0" -> pressButton("f");
+                case "v" -> pressButton("o");
+            }
         } else if (event.getCode() == KeyCode.BACK_SPACE) {
             pressButtonBackslash();
         } else if (event.getCode() == KeyCode.ENTER) {

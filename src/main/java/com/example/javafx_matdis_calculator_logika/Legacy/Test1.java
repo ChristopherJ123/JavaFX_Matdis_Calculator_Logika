@@ -1,4 +1,4 @@
-package com.example.javafx_matdis_calculator_logika.Testing;
+package com.example.javafx_matdis_calculator_logika.Legacy;
 
 import java.util.Scanner;
 

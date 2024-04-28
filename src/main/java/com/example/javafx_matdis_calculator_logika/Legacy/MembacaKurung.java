@@ -1,4 +1,4 @@
-package com.example.javafx_matdis_calculator_logika.Testing;
+package com.example.javafx_matdis_calculator_logika.Legacy;
 
 import java.util.*;
 
@@ -241,16 +241,13 @@ public class MembacaKurung {
                     System.out.print("Hukum: " + simplified[1] + "(" + listInput.get(i) + ")");
                     System.out.println(" menjadi: " + listOutput.get(i));
                     running = Boolean.parseBoolean(simplified[2]);
-                    System.out.println(running);
                 } else {
-//                    System.out.println("++++++++++");
                     System.out.println("----------");
                     for (int j = i-1; j >= 0; j--) {
                         listOutput.set(i, listOutput.get(i).replace(listInput.get(j), listOutput.get(j)));
                         System.out.println("REPLACE: " + listInput.get(j) + " WITH: " + listOutput.get(j) + " MENJADI: " + listOutput.get(i));
                     }
                     System.out.println("----------");
-//                    System.out.println("++++++++++");
                 }
             }
 
@@ -325,6 +322,7 @@ Testing Prompts
 9. Hukum Implikasi
 (P i nQ) == (nPonQ) == nP o NQ
 ((P i nQ) i (nP i Q)) == (n(nPonQ)o(PoQ)) == n((nP o nQ) o (P o Q))
+((P i Q) i (P i Q))
 (((Q i P) i (P i (P i Q))) a (P i nQ) o (nP i Q) i (nP i nQ)) == (((((QonP)onP)on(PonQ))a(nQonP))o((nQoP)on(QoP)))
 
 10. Hukum Kontraposisi

@@ -4,7 +4,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
@@ -13,8 +13,7 @@
       <Label layoutX="73.0" layoutY="49.0" text="Input     :" />
       <Label layoutX="73.0" layoutY="99.0" text="Output  :" />
       <TextField fx:id="UserInput" layoutX="169.0" layoutY="45.0" onKeyPressed="#KeyListener" prefHeight="26.0" prefWidth="495.0" promptText="(p^q)" />
-      <TextField fx:id="output" layoutX="169.0" layoutY="95.0" prefHeight="26.0" prefWidth="495.0" />
-      <TableView layoutX="73.0" layoutY="175.0" prefHeight="276.0" prefWidth="593.0" />
+      <TextField fx:id="output" editable="false" layoutX="169.0" layoutY="95.0" prefHeight="26.0" prefWidth="495.0" />
       <ButtonBar layoutX="79.0" layoutY="494.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="0.0" prefWidth="560.0">
          <cursor>
             <Cursor fx:constant="DEFAULT" />
@@ -40,5 +39,6 @@
             <Button mnemonicParsing="false" onAction="#pressButtonEquals" text="↵" />
         </buttons>
       </ButtonBar>
+      <TextArea fx:id="table" editable="false" layoutX="73.0" layoutY="166.0" prefHeight="274.0" prefWidth="594.0" />
    </children>
 </AnchorPane>
