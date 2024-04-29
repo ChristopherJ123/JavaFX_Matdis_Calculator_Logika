@@ -40,6 +40,7 @@ public class TruthTable {
     }
 
     static String[][] truthTable (String input) {
+        input = InfixToPostfixAlgorithm.infixToPostfix(input);
         String[][] table = new String[3][5];
         table[0][0] = "P";
         table[1][0] = "Q";

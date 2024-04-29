@@ -37,7 +37,7 @@ public class LogicCalculatorController {
                 switch (low) {
                     case "1" -> Input = Input.concat("T");
                     case "0" -> Input = Input.concat("F");
-                    case "n" -> Input = Input.concat("¬(");
+                    case "n" -> Input = Input.concat("¬");
                     case "o" -> Input = Input.concat(" V ");
                     case "a" -> Input = Input.concat(" Λ ");
                     case "i" -> Input = Input.concat(" → ");
@@ -52,11 +52,13 @@ public class LogicCalculatorController {
                 switch (errorCode) {
                     case 1 -> output.setText("Isi input terlebih dahulu!");
                     case 2 -> output.setText("Error! Jumlah open bracket dan close bracket tidak sama!");
-                    case 3 -> output.setText("Error! Setelah (not) harus ada variabel!");
-//                    case 4 -> output.setText("Error! Length input tidak boleh lebih panjang dari 30!");
+                    case 3 -> output.setText("Error! Setelah operator harus ada variabel!");
+                    case 4 -> output.setText("Error! Setelah not tidak boleh ada not lagi tanpa ada kurung (Ex: nnP, seharusnya n(np) atau n(n(P)))");
+                    case 5 -> output.setText("Error! Length input minimal 30!");
                     default -> {
+
                         String postfix = InfixToPostfixAlgorithm.infixToPostfix(Input.replace(" ", ""));
-                        String[][] truthTable = TruthTable.truthTable(postfix);
+                        String[][] truthTable = TruthTable.truthTable(Input.replace(" ", ""));
                         String truthTableString = "";
                         for (String[] row : truthTable) {
                             for (String item : row) {

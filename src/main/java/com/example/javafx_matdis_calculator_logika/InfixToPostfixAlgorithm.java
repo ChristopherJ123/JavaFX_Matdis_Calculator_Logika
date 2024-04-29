@@ -18,22 +18,37 @@ public class InfixToPostfixAlgorithm {
         }
         if (jumlahOpenBracket != jumlahCloseBracket) return 2;
 
-        // 3. Error apabila setelahnya not tidak ada variabel
-        boolean isValid = false;
+        // 3. Error apabila setelahnya operator tidak ada variabel
         for (int i = 0; i < input.length(); i++) {
             try {
-                if (input.charAt(i) == '¬') isValid = (input.charAt(i + 2) == 'P' || input.charAt(i + 2) == 'Q');
+                if (String.valueOf(input.charAt(i)).matches("[ΛV→↔¬]")) {
+                    boolean isValid = false;
+                    for (int j = i+1; j < input.length(); j++) {
+                        if (input.charAt(j) == 'P' || input.charAt(j) == 'Q') {
+                            isValid = true;
+                            break;
+                        } else if (String.valueOf(input.charAt(j)).matches("[ΛV→↔]")) {
+                            break;
+                        }
+                    }
+                    if (!isValid) return 3;
+                }
             } catch (IndexOutOfBoundsException ignored) {}
         }
-        if (!isValid) return 3;
 
-        // 4. Error apabila jumlah input lebih dari 30 huruf
-        if (input.replace(" ", "").length() > 30) return 4;
+        // 4. Error apabila setelahnya not, not lagi tanpa ada kurung (Ex: nnP, seharusnya n(np) atau n(n(P)))
+        for (int i = 0; i < input.length()-1; i++) {
+            if (input.charAt(i) == '¬' && input.charAt(i+1) == '¬') return 4;
+        }
+
+        // 5. Error apabila jumlah input lebih dari 30 huruf
+        if (input.replace(" ", "").length() < 30) return 5;
 
         return 0; // 0. Tidak ada error
     }
 
-    static String infixToPostfix(String input) {
+    static String infixToPostfix(String string) {
+        String input = string.replace("T", "1").replace("F", "0");
         String output = "";
 
         ArrayList<String> operators = new ArrayList<>();
@@ -113,7 +128,7 @@ public class InfixToPostfixAlgorithm {
                         operators.add(String.valueOf(input.charAt(i)));
                     }
                 }
-            } else if ("pq".contains(String.valueOf(input.charAt(i)).toLowerCase())) {
+            } else if ("pq01".contains(String.valueOf(input.charAt(i)).toLowerCase())) {
                 output = output.concat(String.valueOf(input.charAt(i)));
             }
         }
