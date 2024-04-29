@@ -1,0 +1,9 @@
+.root {
+    -fx-background-color: "black";
+}
+
+.label {
+    -fx-font-size:14;
+    -fx-text-fill: "white";
+    -fx-effect: dropshadow(gaussian, rgba(255, 255, 255, 0.8), 0, 0, 0, 1);
+}

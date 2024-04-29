@@ -54,18 +54,70 @@ public class LogicCalculatorController {
                     case 2 -> output.setText("Error! Jumlah open bracket dan close bracket tidak sama!");
                     case 3 -> output.setText("Error! Setelah operator harus ada variabel!");
                     case 4 -> output.setText("Error! Setelah not tidak boleh ada not lagi tanpa ada kurung (Ex: nnP, seharusnya n(np) atau n(n(P)))");
-                    case 5 -> output.setText("Error! Length input minimal 30!");
+                    //case 5 -> output.setText("Error! Length input minimal 30!");
                     default -> {
 
                         String postfix = InfixToPostfixAlgorithm.infixToPostfix(Input.replace(" ", ""));
                         String[][] truthTable = TruthTable.truthTable(Input.replace(" ", ""));
                         String truthTableString = "";
-                        for (String[] row : truthTable) {
-                            for (String item : row) {
-                                truthTableString = truthTableString.concat(item + "   ");
+                        int count=1;
+                        for (int i=0;i<truthTable[0].length;i++){
+                            for (int j=0;j<truthTable.length;j++){
+                                int tableLength=Input.length();
+                                if (tableLength<10){
+                                    if (count%3==0){
+                                        truthTableString =
+                                                truthTableString.concat(String.format("%30s",truthTable[j][i]));
+                                    }
+                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
+                                } else if (tableLength<20) {
+                                    if (count%3==0){
+                                        truthTableString =
+                                                truthTableString.concat(String.format("%40s",truthTable[j][i]));
+                                    }
+                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
+                                } else if (tableLength<30) {
+                                    if (count%3==0){
+                                        truthTableString = truthTableString.concat(String.format("%50s",truthTable[j][i]));
+                                    }
+                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
+                                }else if (tableLength<40) {
+                                    if (count%3==0){
+                                        truthTableString = truthTableString.concat(String.format("%60s",truthTable[j][i]));
+                                    }
+                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
+                                }else if (tableLength<50) {
+                                    if (count%3==0){
+                                        truthTableString = truthTableString.concat(String.format("%70s",truthTable[j][i]));
+                                    }
+                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
+                                }else if (tableLength<60) {
+                                    if (count%3==0){
+                                        truthTableString =
+                                                truthTableString.concat(String.format("%80s",truthTable[j][i]));
+                                    }
+                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
+                                }else if (tableLength<70) {
+                                    if (count%3==0){
+                                        truthTableString = truthTableString.concat(String.format("%90s",truthTable[j][i]));
+                                    }
+                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
+                                }else {
+                                    if (count%3==0){
+                                        truthTableString = truthTableString.concat(String.format("%100s",truthTable[j][i]));
+                                    }
+                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
+                                }
+                                count++;
                             }
-                            truthTableString = truthTableString.concat("\n");
+                            truthTableString = truthTableString.concat("\n\n");
                         }
+//                        for (String[] row : truthTable) {
+//                            for (String item : row) {
+//                                truthTableString = truthTableString.concat(item + "   ");
+//                            }
+//                            truthTableString = truthTableString.concat("\n");
+//                        }
                         table.setText(truthTableString);
                         output.setText(postfix);
                     }
