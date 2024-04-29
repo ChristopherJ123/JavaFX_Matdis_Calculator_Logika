@@ -38,10 +38,10 @@ public class LogicCalculatorController {
                     case "1" -> Input = Input.concat("T");
                     case "0" -> Input = Input.concat("F");
                     case "n" -> Input = Input.concat("¬");
-                    case "o" -> Input = Input.concat(" V ");
-                    case "a" -> Input = Input.concat(" Λ ");
-                    case "i" -> Input = Input.concat(" → ");
-                    case "b" -> Input = Input.concat(" ↔ ");
+                    case "o" -> Input = Input.concat("V");
+                    case "a" -> Input = Input.concat("Λ");
+                    case "i" -> Input = Input.concat("→");
+                    case "b" -> Input = Input.concat("↔");
                     case "(" -> Input = Input.concat("(");
                     case ")" -> Input = Input.concat(")");
                     case "c" -> Input = "";
