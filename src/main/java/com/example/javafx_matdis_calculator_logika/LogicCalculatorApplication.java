@@ -12,9 +12,9 @@ public class LogicCalculatorApplication extends javafx.application.Application {
             FXMLLoader fxmlLoader = new FXMLLoader(LogicCalculatorApplication.class.getResource("logicCalculator-view.fxml"));
             Scene scene = new Scene(fxmlLoader.load());
 
-            if(getClass().getResource("style.css") != null) {
+            if (getClass().getResource("style.css") != null) {
                 scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-            }else System.out.println("lol");
+            } else System.out.println("lol");
 
             stage.setTitle("Logic Calculator");
             stage.setScene(scene);

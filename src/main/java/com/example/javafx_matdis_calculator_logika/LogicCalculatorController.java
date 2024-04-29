@@ -50,82 +50,83 @@ public class LogicCalculatorController {
             case "=" -> {
                 int errorCode = InfixToPostfixAlgorithm.checkForErrors(Input.replace(" ", ""));
                 switch (errorCode) {
-                    case 1 -> output.setText("Isi input terlebih dahulu!");
-                    case 2 -> output.setText("Error! Jumlah open bracket dan close bracket tidak sama!");
-                    //case 3 -> output.setText("Error! Setelah operator harus ada variabel!");
-                    case 4 -> output.setText("Error! Setelah not tidak boleh ada not lagi tanpa ada kurung (Ex: nnP, seharusnya n(np) atau n(n(P)))");
-                    //case 5 -> output.setText("Error! Length input minimal 30!");
+                    case 1 -> {
+                        output.setText("Isi input terlebih dahulu!");
+                        table.setText("");
+                    }
+                    case 2 -> {
+                        output.setText("Error! Jumlah open bracket dan close bracket tidak sama!");
+                        table.setText("");
+                    }
+                    case 3 -> {
+                        output.setText("Error! Setelah operator harus ada variabel!");
+                        table.setText("");
+                    }
+                    case 4 -> {
+                        output.setText("Error! Setelah not tidak boleh ada not lagi tanpa ada kurung (Ex: nnP, seharusnya n(np) atau n(n(P)))");
+                        table.setText("");
+                    }
+                    case 5 -> {
+                        output.setText("Error! Setelah variabel tidak boleh ada variabel lain!");
+                        table.setText("");
+                    }
+                    //case 6 -> output.setText("Error! Length input minimal 30!");
                     default -> {
-
-                        String postfix = InfixToPostfixAlgorithm.infixToPostfix(Input.replace(" ", ""));
                         String[][] truthTable = TruthTable.truthTable(Input.replace(" ", ""));
                         String truthTableString = "";
-                        int count=1;
-                        for (int i=0;i<truthTable[0].length;i++){
-                            for (int j=0;j<truthTable.length;j++){
-                                int tableLength=Input.length();
-                                if (tableLength<10){
-                                    if (count%3==0){
-                                        truthTableString =
-                                                truthTableString.concat(String.format("%30s",truthTable[j][i]));
-                                    }
-                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
-                                } else if (tableLength<20) {
-                                    if (count%3==0){
-                                        truthTableString =
-                                                truthTableString.concat(String.format("%40s",truthTable[j][i]));
-                                    }
-                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
-                                } else if (tableLength<30) {
-                                    if (count%3==0){
-                                        truthTableString = truthTableString.concat(String.format("%50s",truthTable[j][i]));
-                                    }
-                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
-                                }else if (tableLength<40) {
-                                    if (count%3==0){
-                                        truthTableString = truthTableString.concat(String.format("%60s",truthTable[j][i]));
-                                    }
-                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
-                                }else if (tableLength<50) {
-                                    if (count%3==0){
-                                        truthTableString = truthTableString.concat(String.format("%70s",truthTable[j][i]));
-                                    }
-                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
-                                }else if (tableLength<60) {
-                                    if (count%3==0){
-                                        truthTableString =
-                                                truthTableString.concat(String.format("%80s",truthTable[j][i]));
-                                    }
-                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
-                                }else if (tableLength<70) {
-                                    if (count%3==0){
-                                        truthTableString = truthTableString.concat(String.format("%90s",truthTable[j][i]));
-                                    }
-                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
-                                }else {
-                                    if (count%3==0){
-                                        truthTableString = truthTableString.concat(String.format("%100s",truthTable[j][i]));
-                                    }
-                                    else truthTableString = truthTableString.concat(String.format("%15s",truthTable[j][i]));
-                                }
-                                count++;
+                        String[][] truthTableRotatedClockwise = new String[truthTable[0].length][truthTable.length];
+                        for (int i = 0; i < truthTable.length; i++) {
+                            for (int j = 0; j < truthTable[i].length; j++) {
+                                truthTableRotatedClockwise[j][i] = truthTable[i][j];
                             }
-                            truthTableString = truthTableString.concat("\n\n");
                         }
-//                        for (String[] row : truthTable) {
-//                            for (String item : row) {
-//                                truthTableString = truthTableString.concat(item + "   ");
-//                            }
-//                            truthTableString = truthTableString.concat("\n");
-//                        }
-                        if (truthTable[2][1].equals("1")&&truthTable[2][2].equals("1")&&truthTable[2][3].equals("1")&&truthTable[2][4].equals("1")){
+                        int gapCount = truthTable[truthTable.length-1][0].length()/2;
+                        for (int i = 0; i < truthTableRotatedClockwise.length; i++) {
+                            for (int j = 0; j < truthTableRotatedClockwise[i].length; j++) {
+                                if (i != 0 && j == truthTableRotatedClockwise[i].length-1) truthTableString = truthTableString.concat("  ".repeat(gapCount) + truthTableRotatedClockwise[i][j] + "\t\t");
+                                else truthTableString = truthTableString.concat(truthTableRotatedClockwise[i][j] + "\t\t");
+                            }
+                            truthTableString = truthTableString.concat("\n");
+                        }
+                        boolean allTrue = false;
+                        boolean allFalse = false;
+                        try {
+                            for (int i = 1; i < truthTable.length+1; i++) {
+                                if (truthTable[truthTable.length-1][i].equals("1")) {
+                                    allTrue = true;
+                                } else {
+                                    allTrue = false;
+                                    break;
+                                }
+                            }
+                            for (int i = 1; i < truthTable.length+1; i++) {
+                                if (truthTable[truthTable.length-1][i].equals("0")) {
+                                    allFalse = true;
+                                } else {
+                                    allFalse = false;
+                                    break;
+                                }
+                            }
+                        } catch (ArrayIndexOutOfBoundsException e) {
+                            output.setText(truthTable[0][0].equals("1") ? "Tautology" : "Contradiction");
+                            table.setText("");
+                            return;
+                        }
+
+                        if (allTrue && !allFalse) {
                             output.setText("Tautology");
-                        } else if (truthTable[2][1].equals("0")&&truthTable[2][2].equals("0")&&truthTable[2][3].equals("0")&&truthTable[2][4].equals("0")) {
+                        } else if (!allTrue && allFalse) {
                             output.setText("Contradiction");
                         } else {
                             output.setText("Contingency");
                         }
                         table.setText(truthTableString);
+//                        for (String[] row : truthTable) {
+//                            for (String item : row) {
+//                                System.out.print(item + "\t");
+//                            }
+//                            System.out.println();
+//                        }
                     }
                 }
             }
