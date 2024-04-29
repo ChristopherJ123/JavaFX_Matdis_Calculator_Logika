@@ -52,7 +52,7 @@ public class LogicCalculatorController {
                 switch (errorCode) {
                     case 1 -> output.setText("Isi input terlebih dahulu!");
                     case 2 -> output.setText("Error! Jumlah open bracket dan close bracket tidak sama!");
-                    case 3 -> output.setText("Error! Setelah operator harus ada variabel!");
+                    //case 3 -> output.setText("Error! Setelah operator harus ada variabel!");
                     case 4 -> output.setText("Error! Setelah not tidak boleh ada not lagi tanpa ada kurung (Ex: nnP, seharusnya n(np) atau n(n(P)))");
                     //case 5 -> output.setText("Error! Length input minimal 30!");
                     default -> {
