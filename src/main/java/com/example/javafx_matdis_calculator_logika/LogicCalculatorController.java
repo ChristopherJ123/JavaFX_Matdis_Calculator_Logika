@@ -48,17 +48,25 @@ public class LogicCalculatorController {
                 }
             }
             case "=" -> {
-                String postfix = InfixToPostfixAlgorithm.infixToPostfix(Input.replace(" ", ""));
-                String[][] truthTable = TruthTable.truthTable(postfix);
-                String truthTableString = "";
-                for (String[] row : truthTable) {
-                    for (String item : row) {
-                        truthTableString = truthTableString.concat(item + "   ");
+                int errorCode = InfixToPostfixAlgorithm.checkForErrors(Input.replace(" ", ""));
+                switch (errorCode) {
+                    case 1 -> output.setText("Isi input terlebih dahulu!");
+                    case 2 -> output.setText("Error! Jumlah open bracket dan close bracket tidak sama!");
+                    case 3 -> output.setText("Error! Setelah (not) harus ada variabel!");
+                    default -> {
+                        String postfix = InfixToPostfixAlgorithm.infixToPostfix(Input.replace(" ", ""));
+                        String[][] truthTable = TruthTable.truthTable(postfix);
+                        String truthTableString = "";
+                        for (String[] row : truthTable) {
+                            for (String item : row) {
+                                truthTableString = truthTableString.concat(item + "   ");
+                            }
+                            truthTableString = truthTableString.concat("\n");
+                        }
+                        table.setText(truthTableString);
+                        output.setText(postfix);
                     }
-                    truthTableString = truthTableString.concat("\n");
                 }
-                table.setText(truthTableString);
-                output.setText(postfix);
             }
         }
         updateScreen();

@@ -5,6 +5,31 @@ import java.util.Scanner;
 
 public class InfixToPostfixAlgorithm {
 
+    static int checkForErrors(String input) {
+        // 1. Error apabila input kosong
+        if (input.equals("")) return 1;
+
+        // 2. Error apabila jumlah kurung tidak sama
+        int jumlahOpenBracket = 0;
+        int jumlahCloseBracket = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == '(') jumlahOpenBracket++;
+            if (input.charAt(i) == ')') jumlahCloseBracket++;
+        }
+        if (jumlahOpenBracket != jumlahCloseBracket) return 2;
+
+        // 3. Error apabila setelahnya not tidak ada variabel
+        boolean isValid = false;
+        for (int i = 0; i < input.length(); i++) {
+            try {
+                if (input.charAt(i) == '¬') isValid = (input.charAt(i + 2) == 'P' || input.charAt(i + 2) == 'Q');
+            } catch (IndexOutOfBoundsException ignored) {}
+        }
+        if (!isValid) return 3;
+
+        return 0; // 0. Tidak ada error
+    }
+
     static String infixToPostfix(String input) {
         String output = "";
 
@@ -100,6 +125,6 @@ public class InfixToPostfixAlgorithm {
         Scanner scanner = new Scanner(System.in);
 
         String input = scanner.nextLine().replace("a", "Λ").replace("o", "V").replace("i", "→").replace("b", "↔").replace("n", "¬");
-        System.out.println(infixToPostfix(input));
+        System.out.println(infixToPostfix(input).replace("Λ", "a").replace("V", "o").replace("→", "i").replace("↔", "b").replace("¬", "n"));
     }
 }
