@@ -118,8 +118,14 @@ public class LogicCalculatorController {
 //                            }
 //                            truthTableString = truthTableString.concat("\n");
 //                        }
+                        if (truthTable[2][1].equals("1")&&truthTable[2][2].equals("1")&&truthTable[2][3].equals("1")&&truthTable[2][4].equals("1")){
+                            output.setText("Tautology");
+                        } else if (truthTable[2][1].equals("0")&&truthTable[2][2].equals("0")&&truthTable[2][3].equals("0")&&truthTable[2][4].equals("0")) {
+                            output.setText("Contradiction");
+                        } else {
+                            output.setText("Contingency");
+                        }
                         table.setText(truthTableString);
-                        output.setText(postfix);
                     }
                 }
             }
