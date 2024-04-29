@@ -27,6 +27,9 @@ public class InfixToPostfixAlgorithm {
         }
         if (!isValid) return 3;
 
+        // 4. Error apabila jumlah input lebih dari 30 huruf
+        if (input.replace(" ", "").length() > 30) return 4;
+
         return 0; // 0. Tidak ada error
     }
 

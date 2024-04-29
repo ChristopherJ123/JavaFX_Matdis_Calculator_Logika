@@ -53,6 +53,7 @@ public class LogicCalculatorController {
                     case 1 -> output.setText("Isi input terlebih dahulu!");
                     case 2 -> output.setText("Error! Jumlah open bracket dan close bracket tidak sama!");
                     case 3 -> output.setText("Error! Setelah (not) harus ada variabel!");
+//                    case 4 -> output.setText("Error! Length input tidak boleh lebih panjang dari 30!");
                     default -> {
                         String postfix = InfixToPostfixAlgorithm.infixToPostfix(Input.replace(" ", ""));
                         String[][] truthTable = TruthTable.truthTable(postfix);
