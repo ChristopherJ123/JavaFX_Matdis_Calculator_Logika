@@ -52,7 +52,7 @@ public class InfixToPostfixAlgorithm {
         return 0; // 0. Tidak ada error
     }
 
-    static String infixToPostfix(String string) {
+    public static String infixToPostfix(String string) {
         String input = string.replace("T", "1").replace("F", "0");
         String output = "";
 
