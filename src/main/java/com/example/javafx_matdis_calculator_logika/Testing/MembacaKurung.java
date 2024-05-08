@@ -1,4 +1,4 @@
-package com.example.javafx_matdis_calculator_logika.Legacy;
+package com.example.javafx_matdis_calculator_logika.Testing;
 
 import java.util.*;
 

@@ -70,7 +70,7 @@ public class LogicCalculatorController {
                         output.setText("Error! Setelah variabel tidak boleh ada variabel lain!");
                         table.setText("");
                     }
-                    //case 6 -> output.setText("Error! Length input minimal 30!");
+                    case 6 -> output.setText("Error! Length input minimal 30!");
                     default -> {
                         String[][] truthTable = TruthTable.truthTable(Input.replace(" ", ""));
                         String truthTableString = "";
