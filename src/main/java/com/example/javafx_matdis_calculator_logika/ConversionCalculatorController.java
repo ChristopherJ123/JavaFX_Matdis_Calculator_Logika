@@ -41,19 +41,15 @@ public class ConversionCalculatorController {
             infixIsClicked = true;
             prefixIsClicked = false;
             postfixIsClicked = false;
-            System.out.println(infixIsClicked + " " + prefixIsClicked + " " + postfixIsClicked);
         } else if (event.getSource().toString().equals("TextField[id=prefixInput, styleClass=text-input text-field]")) {
             infixIsClicked = false;
             prefixIsClicked = true;
             postfixIsClicked = false;
-            System.out.println(infixIsClicked + " " + prefixIsClicked + " " + postfixIsClicked);
         } else if (event.getSource().toString().equals("TextField[id=postfixInput, styleClass=text-input text-field]")) {
             infixIsClicked = false;
             prefixIsClicked = false;
             postfixIsClicked = true;
-            System.out.println(infixIsClicked + " " + prefixIsClicked + " " + postfixIsClicked);
         }
-        System.out.println(event.getSource().toString());
     }
 
     @FXML
@@ -130,8 +126,6 @@ public class ConversionCalculatorController {
 
                 int errorCode = 0;
 
-
-
                 if (infixIsClicked) {
                     errorCode = InfixToPostfixAlgorithm.checkForErrors(infixInputString.replace(" ", ""));
                     switch (errorCode) {
@@ -160,6 +154,10 @@ public class ConversionCalculatorController {
                             this.postfixInput.setText(postfix);
                             String prefix = InfixToPrefixEasy.infixToPrefix(infixInputString);
                             this.prefixInput.setText(prefix);
+                            System.out.println(this.postfixInput.getText());
+                            System.out.println(this.prefixInput.getText());
+                            System.out.println("Success");
+                            System.out.println(errorCode);
                         }
                     }
                 } else if (prefixIsClicked) {
@@ -239,6 +237,7 @@ public class ConversionCalculatorController {
                 }
 
                 if (errorCode == 0) {
+                    System.out.println("table");
                     String[][] truthTable = TruthTable.truthTable(infixInput.getText());
                     String truthTableString = "";
                     String[][] truthTableRotatedClockwise = new String[truthTable[0].length][truthTable.length];

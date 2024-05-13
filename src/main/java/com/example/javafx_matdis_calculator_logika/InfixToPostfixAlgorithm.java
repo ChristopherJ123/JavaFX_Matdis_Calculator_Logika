@@ -47,7 +47,7 @@ public class InfixToPostfixAlgorithm {
         }
 
         // 6. Error apabila jumlah input lebih dari 30 huruf
-        if (input.length() < 30) return 6;
+//        if (input.length() < 30) return 6;
 
         return 0; // 0. Tidak ada error
     }
