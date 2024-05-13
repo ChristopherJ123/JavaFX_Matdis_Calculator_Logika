@@ -5,7 +5,7 @@ import com.example.javafx_matdis_calculator_logika.InfixToPostfixAlgorithm;
 import java.util.Scanner;
 
 public class PrefixToPostfixBridge {
-    static String prefixToPostfix(String input) {
+    public static String prefixToPostfix(String input) {
         String inputFromPrefixToInfix = PrefixToInfixAlgorithm.prefixToInfix(input);
         return InfixToPostfixAlgorithm.infixToPostfix(inputFromPrefixToInfix);
     }

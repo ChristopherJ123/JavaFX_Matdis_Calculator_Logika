@@ -24,7 +24,7 @@ public class InfixToPostfixAlgorithm {
                 if (String.valueOf(input.charAt(i)).matches("[ΛV→↔¬]")) {
                     boolean isValid = false;
                     for (int j = i+1; j < input.length(); j++) {
-                        if (String.valueOf(input.charAt(j)).matches("[PQTF]")) {
+                        if (String.valueOf(input.charAt(j)).matches("[PQ10]")) {
                             isValid = true;
                             break;
                         } else if (String.valueOf(input.charAt(j)).matches("[ΛV→↔]")) {
@@ -43,7 +43,7 @@ public class InfixToPostfixAlgorithm {
 
         // 5. Error apabila setelah Variabel adalah variabel lagi
         for (int i = 0; i < input.length()-1; i++) {
-            if (String.valueOf(input.charAt(i)).matches("[PQTF]") && String.valueOf(input.charAt(i+1)).matches("[PQTF]")) return 5;
+            if (String.valueOf(input.charAt(i)).matches("[PQ10]") && String.valueOf(input.charAt(i+1)).matches("[PQ10]")) return 5;
         }
 
         // 6. Error apabila jumlah input lebih dari 30 huruf

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PrefixToInfixAlgorithm {
-    static String prefixToInfix(String input) {
+    public static String prefixToInfix(String input) {
         String output = "";
 
         ArrayList<String> variables = new ArrayList<>();

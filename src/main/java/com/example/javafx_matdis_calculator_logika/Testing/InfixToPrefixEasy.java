@@ -5,7 +5,8 @@ import com.example.javafx_matdis_calculator_logika.InfixToPostfixAlgorithm;
 import java.util.Scanner;
 
 public class InfixToPrefixEasy {
-    static String infixToPrefix(String input) {
+
+    public static String infixToPrefix(String input) {
         String newInput = "";
         for (int i = input.length()-1; i >= 0; i--) {
             newInput = newInput.concat(String.valueOf(input.charAt(i)));
@@ -15,7 +16,7 @@ public class InfixToPrefixEasy {
         for (int i = newInputFromInfixToPostfix.length()-1; i >= 0; i--) {
             output = output.concat(String.valueOf(newInputFromInfixToPostfix.charAt(i)));
         }
-        return output;
+        return output.replace("(", "");
     }
 
     public static void main(String[] args) {

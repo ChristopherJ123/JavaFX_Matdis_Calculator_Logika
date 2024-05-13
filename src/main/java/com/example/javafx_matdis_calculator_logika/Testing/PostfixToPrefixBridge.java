@@ -3,7 +3,7 @@ package com.example.javafx_matdis_calculator_logika.Testing;
 import java.util.Scanner;
 
 public class PostfixToPrefixBridge {
-    static String postfixToPrefix(String input) {
+    public static String postfixToPrefix(String input) {
         String inputFromPostfixToInfix = PostfixToInfixAlgorithm.postfixToInfix(input);
         return InfixToPrefixEasy.infixToPrefix(inputFromPostfixToInfix);
     }

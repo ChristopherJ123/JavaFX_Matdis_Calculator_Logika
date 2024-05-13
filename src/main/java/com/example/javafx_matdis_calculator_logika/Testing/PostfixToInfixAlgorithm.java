@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class PostfixToInfixAlgorithm {
-    static String postfixToInfix(String input) {
+    public static String postfixToInfix(String input) {
         String output = "";
 
         ArrayList<String> variables = new ArrayList<>();
