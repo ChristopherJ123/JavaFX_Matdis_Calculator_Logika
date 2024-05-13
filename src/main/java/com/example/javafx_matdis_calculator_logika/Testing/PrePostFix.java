@@ -2,11 +2,12 @@ package com.example.javafx_matdis_calculator_logika.Testing;
 
 public class PrePostFix {
     public static int checkPostfixErrors(String input) {
+        System.out.println(input);
         // 1. Error apabila input kosong
         if (input.equals("")) return 1;
 
         // 7. Error apabila ada kurung
-        if (input.matches("[()]")) return 7;
+        if (input.contains("(") || input.contains(")")) return 7;
 
         // 8. Error apabila di belakang tidak ada operator
         if (!String.valueOf(input.charAt(input.length()-1)).matches("[ΛV→↔¬]")) return 8;

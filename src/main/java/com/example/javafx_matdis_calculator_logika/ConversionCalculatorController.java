@@ -154,10 +154,6 @@ public class ConversionCalculatorController {
                             this.postfixInput.setText(postfix);
                             String prefix = InfixToPrefixEasy.infixToPrefix(infixInputString);
                             this.prefixInput.setText(prefix);
-                            System.out.println(this.postfixInput.getText());
-                            System.out.println(this.prefixInput.getText());
-                            System.out.println("Success");
-                            System.out.println(errorCode);
                         }
                     }
                 } else if (prefixIsClicked) {
@@ -222,22 +218,22 @@ public class ConversionCalculatorController {
                     }
                 }
 
-                if (infixIsClicked) {
-                    if ((prefixInput.getText().equals("") || postfixInput.getText().equals("")) && !infixInput.getText().equals("")) {
-                        errorCode = 99;
-                    }
-                } else if (prefixIsClicked) {
-                    if ((infixInput.getText().equals("") || postfixInput.getText().equals("")) && !prefixInput.getText().equals("")) {
-                        errorCode = 99;
-                    }
-                } else if (postfixIsClicked) {
-                    if ((infixInput.getText().equals("") || prefixInput.getText().equals("")) && !postfixInput.getText().equals("")) {
-                        errorCode = 99;
-                    }
-                }
+//                if (infixIsClicked) {
+//                    if ((prefixInput.getText().equals("") || postfixInput.getText().equals("")) && !infixInput.getText().equals("")) {
+//                        System.out.println("aa");
+//                        errorCode = 99;
+//                    }
+//                } else if (prefixIsClicked) {
+//                    if ((infixInput.getText().equals("") || postfixInput.getText().equals("")) && !prefixInput.getText().equals("")) {
+//                        errorCode = 99;
+//                    }
+//                } else if (postfixIsClicked) {
+//                    if ((infixInput.getText().equals("") || prefixInput.getText().equals("")) && !postfixInput.getText().equals("")) {
+//                        errorCode = 99;
+//                    }
+//                }
 
                 if (errorCode == 0) {
-                    System.out.println("table");
                     String[][] truthTable = TruthTable.truthTable(infixInput.getText());
                     String truthTableString = "";
                     String[][] truthTableRotatedClockwise = new String[truthTable[0].length][truthTable.length];
