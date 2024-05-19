@@ -60,6 +60,7 @@ public class InfixToPostfixAlgorithm {
 
         for (int i = 0; i < input.length(); i++) {
             if ("ΛV→↔¬()".contains(String.valueOf(input.charAt(i)))) { // Operator
+                System.out.print("Doing operator (level 0) ");
                 if ("()".contains(String.valueOf(input.charAt(i)))) {
                     if (input.charAt(i) == '(') operators.add("(");
                     else if (input.charAt(i) == ')') {
@@ -72,7 +73,8 @@ public class InfixToPostfixAlgorithm {
                             operators.remove(j);
                         }
                     }
-                } else if ("ΛV".contains(String.valueOf(input.charAt(i)))) { // Level 1
+                } else if ("↔".contains(String.valueOf(input.charAt(i)))) { // Level 1
+                    System.out.print("Doing b (level 1) ");
                     try {
                         if (operators.get(operators.size()-1).matches("[¬↔→ΛV]")) {
                             for (int j = operators.size()-1; j >= 0; j--) {
@@ -88,10 +90,12 @@ public class InfixToPostfixAlgorithm {
                         operators.add(String.valueOf(input.charAt(i)));
                     }
                 } else if ("→".contains(String.valueOf(input.charAt(i)))) { // Level 2
+                    System.out.print("Doing i (level 2) ");
                     try {
-                        if (operators.get(operators.size()-1).matches("[¬↔→]")) {
+                        if (operators.get(operators.size()-1).matches("[VΛ¬→↔]")) {
                             for (int j = operators.size()-1; j >= 0; j--) {
                                 if (operators.get(j).equals("(")) break;
+                                if (operators.get(j).matches("[→]")) break;
                                 output = output.concat(operators.get(j));
                                 operators.remove(j);
                             }
@@ -102,11 +106,13 @@ public class InfixToPostfixAlgorithm {
                     } catch (IndexOutOfBoundsException e) {
                         operators.add(String.valueOf(input.charAt(i)));
                     }
-                } else if ("↔".contains(String.valueOf(input.charAt(i)))) { // Level 3
+                } else if ("V".contains(String.valueOf(input.charAt(i)))) { // Level 3
+                    System.out.print("Doing o (level 3) ");
                     try {
-                        if (operators.get(operators.size()-1).matches("[¬↔]")) {
+                        if (operators.get(operators.size()-1).matches("[VΛ¬]")) {
                             for (int j = operators.size()-1; j >= 0; j--) {
                                 if (operators.get(j).equals("(")) break;
+                                if (operators.get(j).matches("[→↔]")) break;
                                 output = output.concat(operators.get(j));
                                 operators.remove(j);
                             }
@@ -117,11 +123,30 @@ public class InfixToPostfixAlgorithm {
                     } catch (IndexOutOfBoundsException e) {
                         operators.add(String.valueOf(input.charAt(i)));
                     }
-                } else if ("¬".contains(String.valueOf(input.charAt(i)))) { // Level 4
+                } else if ("Λ".contains(String.valueOf(input.charAt(i)))) { // Level 4
+                    System.out.print("Doing a (level 4) ");
+                    try {
+                        if (operators.get(operators.size()-1).matches("[Λ¬]")) {
+                            for (int j = operators.size()-1; j >= 0; j--) {
+                                if (operators.get(j).equals("(")) break;
+                                if (operators.get(j).matches("[→↔V]")) break;
+                                output = output.concat(operators.get(j));
+                                operators.remove(j);
+                            }
+                            operators.add(String.valueOf(input.charAt(i)));
+                        } else {
+                            operators.add(String.valueOf(input.charAt(i)));
+                        }
+                    } catch (IndexOutOfBoundsException e) {
+                        operators.add(String.valueOf(input.charAt(i)));
+                    }
+                } else if ("¬".contains(String.valueOf(input.charAt(i)))) { // Level 5
+                    System.out.print("Doing n (level 5) ");
                     try {
                         if (operators.get(operators.size()-1).matches("[¬]")) {
                             for (int j = operators.size()-1; j >= 0; j--) {
                                 if (operators.get(j).equals("(")) break;
+                                if (operators.get(j).matches("[→↔VΛ]")) break;
                                 output = output.concat(operators.get(j));
                                 operators.remove(j);
                             }
@@ -136,6 +161,7 @@ public class InfixToPostfixAlgorithm {
             } else if ("pq01".contains(String.valueOf(input.charAt(i)).toLowerCase())) {
                 output = output.concat(String.valueOf(input.charAt(i)));
             }
+            System.out.println((output + " " + operators.toString().replaceAll("[\\[\\], ]", "")).replace("Λ", "a").replace("V", "o").replace("→", "i").replace("↔", "b").replace("¬", "n"));
         }
         for (int i = operators.size()-1; i >= 0; i--) {
             output = output.concat(operators.get(i));
