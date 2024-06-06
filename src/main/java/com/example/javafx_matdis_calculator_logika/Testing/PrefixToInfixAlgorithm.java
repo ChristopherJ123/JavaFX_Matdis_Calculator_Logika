@@ -19,7 +19,7 @@ public class PrefixToInfixAlgorithm {
                     variables.remove(variables.size() - 1);
                     variables.add(output);
                 } else {
-                    output = variables.get(variables.size() - 1) + input.charAt(i) + variables.get(variables.size() - 2);
+                    output = "(" + variables.get(variables.size() - 1) + input.charAt(i) + variables.get(variables.size() - 2) + ")";
                     variables.remove(variables.size() - 2);
                     variables.remove(variables.size() - 1);
                     variables.add(output);

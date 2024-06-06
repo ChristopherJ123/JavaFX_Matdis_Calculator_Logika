@@ -2,6 +2,7 @@ package com.example.javafx_matdis_calculator_logika;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 
@@ -10,11 +11,13 @@ public class ConversionCalculatorApplication extends javafx.application.Applicat
     public void start(Stage stage) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(LogicCalculatorApplication.class.getResource("conversionCalculator-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load());
+            Font algerianFont = Font.loadFont(getClass().getResourceAsStream("algerian.ttf"), 20);
 
-            if (getClass().getResource("style.css") != null) {
-                scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
-            } else System.out.println("lol");
+            Scene scene = new Scene(fxmlLoader.load());
+//
+//            if (getClass().getResource("style.css") != null) {
+//                scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());
+//            } else System.out.println("lol");
 
             stage.setTitle("Logic Calculator");
             stage.setScene(scene);

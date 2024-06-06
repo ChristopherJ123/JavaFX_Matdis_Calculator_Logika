@@ -7,15 +7,31 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="606.0" prefWidth="723.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.javafx_matdis_calculator_logika.ConversionCalculatorController">
    <children>
-      <Label layoutX="73.0" layoutY="36.0" text="Infix        :" />
-      <TextField fx:id="infixInput" layoutX="73.0" layoutY="54.0" onKeyPressed="#KeyListener" onMouseClicked="#textBoxClick" prefHeight="26.0" prefWidth="594.0" promptText="(p^q)" />
-      <Label layoutX="73.0" layoutY="87.0" text="Prefix      :" />
-       <TextField fx:id="prefixInput" layoutX="73.0" layoutY="105.0" onKeyPressed="#KeyListener" onMouseClicked="#textBoxClick" prefHeight="26.0" prefWidth="594.0" promptText="(p^q)" />
+      <Label layoutX="73.0" layoutY="36.0" text="Infix        :">
+         <font>
+            <Font name="Algerian" size="12.0" />
+         </font></Label>
+      <TextField fx:id="infixInput" layoutX="73.0" layoutY="54.0" onKeyPressed="#KeyListener" onMouseClicked="#textBoxClick" prefHeight="26.0" prefWidth="594.0" promptText="(p^q)">
+         <font>
+            <Font name="Algerian" size="12.0" />
+         </font></TextField>
+      <Label layoutX="73.0" layoutY="87.0" text="Prefix      :">
+         <font>
+            <Font name="Algerian" size="12.0" />
+         </font></Label>
+       <TextField fx:id="prefixInput" layoutX="73.0" layoutY="105.0" onKeyPressed="#KeyListener" onMouseClicked="#textBoxClick" prefHeight="26.0" prefWidth="594.0" promptText="(p^q)">
+         <font>
+            <Font name="Algerian" size="12.0" />
+         </font></TextField>
       <Label layoutX="73.0" layoutY="142.0" text="Postfix     :" />
-       <TextField fx:id="postfixInput" layoutX="73.0" layoutY="160.0" onKeyPressed="#KeyListener" onMouseClicked="#textBoxClick" prefHeight="26.0" prefWidth="594.0" promptText="(p^q)" />
+       <TextField fx:id="postfixInput" layoutX="73.0" layoutY="160.0" onKeyPressed="#KeyListener" onMouseClicked="#textBoxClick" prefHeight="26.0" prefWidth="594.0" promptText="(p^q)">
+         <font>
+            <Font name="Algerian" size="12.0" />
+         </font></TextField>
       <Label layoutX="73.0" layoutY="203.0" text="Output  :" />
        <TextField fx:id="output" editable="false" layoutX="73.0" layoutY="221.0" prefHeight="26.0" prefWidth="594.0" />
       <TextArea fx:id="table" editable="false" layoutX="73.0" layoutY="280.0" prefHeight="160.0" prefWidth="594.0" />
